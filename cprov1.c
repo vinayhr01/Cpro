@@ -9,15 +9,15 @@ struct node{
 typedef struct node *order;
 
 order getnode(){
-    order p;
+    order allocate;
 
-    p=(order)malloc(sizeof(order));
+    allocate=(order)malloc(sizeof(order));
 
-    if(p==NULL){
+    if(allocate==NULL){
         printf("Insufficient memory\n");
         exit(0);
     }
-    return p;
+    return allocate;
 }
 
 void bf_menu(order root);
@@ -31,14 +31,15 @@ order dinner_order(order root);
 void display_bf_order(order root);
 void display_lunch_order(order root);
 void display_dinner_order(order root);
-void display();
+
+void display_main_menu();
 
 void main(){
     int ch;
     order root=NULL;
 
     for(;;){
-        display();
+        display_main_menu();
         printf("Enter the option to choose\n");
         scanf("%d",&ch);
 
@@ -61,7 +62,7 @@ void main(){
     }
 }
 
-void display(){
+void display_main_menu(){
     printf("                Welcome to C Restaurant.          \n ");
     printf("             +============================+          \n\n");
     printf("  ~~ Please select the meal that you would like to purchase. ~~ \n\n");
@@ -88,7 +89,7 @@ void bf_menu(order root){
         printf("\t\t   6) Tea - Rs 20.00\n");
         printf("\t\t   7) Coffee - Rs 30.00\n");
 
-        printf("Enter an option\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
+        printf("Enter an option in\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
         scanf("%d",&ch);
         switch(ch){
             case 1: root=bf_order(root);
@@ -96,8 +97,8 @@ void bf_menu(order root){
             case 2: display_bf_order(root);
                     break;
 
-            case 3: display();
-                    printf("Enter the option to choose\n");
+            case 3: display_main_menu();
+                    printf("Enter the menu option to choose\n");
                     scanf("%d",&choice);
 
                     switch(choice){
@@ -126,10 +127,10 @@ order bf_order(order root){
     int item_num;
     int quantity;
 
-    printf("Enter the item number to order\n");
+    printf("Enter the breakfast item number to order\n");
     scanf("%d",&item_num);
 
-    printf("Enter the quantity to order\n");
+    printf("Enter the quantity of breakfast to order\n");
     scanf("%d",&quantity);
 
     temp=getnode();
@@ -159,10 +160,13 @@ order bf_order(order root){
 void display_bf_order(order root){
     order temp;
 
+    if(root==NULL){
+        printf("You haven't ordered anything\n");
+    }
     temp=root;
 
     while(temp!=NULL){
-        printf("Item num- %d\nQuantity- %d\n",(temp->item_num),(temp->quantity));
+        printf("Breakfast item num- %d\tBreakfast Quantity- %d\n",(temp->item_num),(temp->quantity));
         temp=temp->link;
     }
 }
@@ -184,7 +188,7 @@ void lunch_menu(order root){
         printf("\t\t   6) Veg Mix - Rs 160.00\n");
         printf("\t\t   7) Ice cream - Rs 30.00\n");
 
-        printf("Enter an option\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
+        printf("Enter an option in\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
         scanf("%d",&ch);
         switch(ch){
             case 1: root=lunch_order(root);
@@ -192,8 +196,8 @@ void lunch_menu(order root){
             case 2: display_lunch_order(root);
                     break;
 
-            case 3: display();
-                    printf("Enter the option to choose\n");
+            case 3: display_main_menu();
+                    printf("Enter the menu option to choose\n");
                     scanf("%d",&choice);
 
                     switch(choice){
@@ -222,10 +226,10 @@ order lunch_order(order root){
     int item_num;
     int quantity;
 
-    printf("Enter the item number to order\n");
+    printf("Enter the lunch item number to order\n");
     scanf("%d",&item_num);
 
-    printf("Enter the quantity to order\n");
+    printf("Enter the quantity of lunch to order\n");
     scanf("%d",&quantity);
 
     temp=getnode();
@@ -255,10 +259,14 @@ order lunch_order(order root){
 void display_lunch_order(order root){
     order temp;
 
+    if(root==NULL){
+        printf("You haven't ordered anything\n");
+    }
+
     temp=root;
 
     while(temp!=NULL){
-        printf("Item num- %d\nQuantity- %d\n",(temp->item_num),(temp->quantity));
+        printf("Lunch item num- %d\tLunch Quantity- %d\n",(temp->item_num),(temp->quantity));
         temp=temp->link;
     }
 }
@@ -280,7 +288,7 @@ void dinner_menu(order root){
         printf("\t\t   6) Paratha - Rs 110.00\n");
         printf("\t\t   7) Fruit Salad - Rs 50.00\n");
 
-        printf("Enter an option\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
+        printf("Enter an option in\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
         scanf("%d",&ch);
         switch(ch){
             case 1: root=dinner_order(root);
@@ -288,8 +296,8 @@ void dinner_menu(order root){
             case 2: display_dinner_order(root);
                     break;
 
-            case 3: display();
-                    printf("Enter the option to choose\n");
+            case 3: display_main_menu();
+                    printf("Enter the food menu option to choose\n");
                     scanf("%d",&choice);
 
                     switch(choice){
@@ -318,10 +326,10 @@ order dinner_order(order root){
     int item_num;
     int quantity;
 
-    printf("Enter the item number to order\n");
+    printf("Enter the dinner item number to order\n");
     scanf("%d",&item_num);
 
-    printf("Enter the quantity to order\n");
+    printf("Enter the quantity of dinner to order\n");
     scanf("%d",&quantity);
 
     temp=getnode();
@@ -351,10 +359,14 @@ order dinner_order(order root){
 void display_dinner_order(order root){
     order temp;
 
+    if(root==NULL){
+        printf("You haven't ordered anything\n");
+    }
+
     temp=root;
 
     while(temp!=NULL){
-        printf("Item num- %d\nQuantity- %d\n",(temp->item_num),(temp->quantity));
+        printf("Dinner item num- %d\tDinner Quantity- %d\n",(temp->item_num),(temp->quantity));
         temp=temp->link;
     }
 }
