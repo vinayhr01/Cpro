@@ -29,6 +29,8 @@ order lunch_order(order root);
 order dinner_order(order root);
 
 void display_bf_order(order root);
+void display_lunch_order(order root);
+void display_dinner_order(order root);
 void display();
 
 void main(){
@@ -166,29 +168,193 @@ void display_bf_order(order root){
 }
 
 void lunch_menu(order root){
-    printf("                Welcome to C Restaurant.          \n ");
-    printf("             +============================+          \n\n");
-    printf("                   $  Lunch Menu  $ \n\n");
-    printf("  ~~ Please select the food that you would like to purchase. ~~ \n\n");
-    printf("\t\t   0) Veg Biryani - Rs 80.00\n");
-    printf("\t\t   1) Special Meal- Rs 120.00\n");
-    printf("\t\t   2) Roti - Rs 20.00\n");
-    printf("\t\t   3) Dal tadka - Rs 120.00\n");
-    printf("\t\t   4) Paneer Tikka - Rs 150.00\n");
-    printf("\t\t   5) Veg Mix - Rs 160.00\n");
-    printf("\t\t   6) Ice cream - Rs 30.00\n");
+    for(;;){
+        int ch;
+        int choice;
+
+        printf("                Welcome to C Restaurant.          \n ");
+        printf("             +============================+          \n\n");
+        printf("                   $  Lunch Menu  $ \n\n");
+        printf("  ~~ Please select the food that you would like to purchase. ~~ \n\n");
+        printf("\t\t   1) Veg Biryani - Rs 80.00\n");
+        printf("\t\t   2) Special Meal- Rs 120.00\n");
+        printf("\t\t   3) Roti - Rs 20.00\n");
+        printf("\t\t   4) Dal tadka - Rs 120.00\n");
+        printf("\t\t   5) Paneer Tikka - Rs 150.00\n");
+        printf("\t\t   6) Veg Mix - Rs 160.00\n");
+        printf("\t\t   7) Ice cream - Rs 30.00\n");
+
+        printf("Enter an option\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1: root=lunch_order(root);
+                    break;
+            case 2: display_lunch_order(root);
+                    break;
+
+            case 3: display();
+                    printf("Enter the option to choose\n");
+                    scanf("%d",&choice);
+
+                    switch(choice){
+                        case 1: bf_menu(root);
+                                break;
+                        
+                        case 2: lunch_menu(root);
+                                break;
+
+                        case 3: dinner_menu(root);
+                                break;
+
+                        case 4: exit(0);
+                                break;
+                    }
+                    break;
+
+            case 4: exit(0);
+        }
+    }
+}
+
+order lunch_order(order root){
+    order temp;
+    order last;
+    int item_num;
+    int quantity;
+
+    printf("Enter the item number to order\n");
+    scanf("%d",&item_num);
+
+    printf("Enter the quantity to order\n");
+    scanf("%d",&quantity);
+
+    temp=getnode();
+
+    temp->item_num=item_num;
+    temp->quantity=quantity;
+    temp->link=NULL;
+
+    if(root==NULL){
+        return temp;
+    }
+
+    if(root->link==NULL){
+        root->link=temp;
+        return root;
+    }
+
+    last=root;
+
+    while(last->link!=NULL){
+        last=last->link;
+    }
+    last->link=temp;
+    return root;
+}
+
+void display_lunch_order(order root){
+    order temp;
+
+    temp=root;
+
+    while(temp!=NULL){
+        printf("Item num- %d\nQuantity- %d\n",(temp->item_num),(temp->quantity));
+        temp=temp->link;
+    }
 }
 
 void dinner_menu(order root){
-    printf("                Welcome to C Restaurant.          \n ");
-    printf("             +============================+          \n\n");
-    printf("                    $  Dinner Menu  $ \n\n");
-    printf("  ~~ Please select the food that you would like to purchase. ~~ \n\n");
-    printf("\t\t   0) Fried Rice - Rs 65.00\n");
-    printf("\t\t   1) Spegatti- Rs 50.00\n");
-    printf("\t\t   2) Burger - Rs 70.00\n");
-    printf("\t\t   3) Pasta - Rs 80.00\n");
-    printf("\t\t   4) Noodles - Rs 65.00\n");
-    printf("\t\t   5) Paratha - Rs 110.00\n");
-    printf("\t\t   6) Fruit Salad - Rs 50.00\n");
+    for(;;){
+        int ch;
+        int choice;
+
+        printf("                Welcome to C Restaurant.          \n ");
+        printf("             +============================+          \n\n");
+        printf("                    $  Dinner Menu  $ \n\n");
+        printf("  ~~ Please select the food that you would like to purchase. ~~ \n\n");
+        printf("\t\t   1) Fried Rice - Rs 65.00\n");
+        printf("\t\t   2) Spegatti- Rs 50.00\n");
+        printf("\t\t   3) Burger - Rs 70.00\n");
+        printf("\t\t   4) Pasta - Rs 80.00\n");
+        printf("\t\t   5) Noodles - Rs 65.00\n");
+        printf("\t\t   6) Paratha - Rs 110.00\n");
+        printf("\t\t   7) Fruit Salad - Rs 50.00\n");
+
+        printf("Enter an option\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1: root=dinner_order(root);
+                    break;
+            case 2: display_dinner_order(root);
+                    break;
+
+            case 3: display();
+                    printf("Enter the option to choose\n");
+                    scanf("%d",&choice);
+
+                    switch(choice){
+                        case 1: bf_menu(root);
+                                break;
+                        
+                        case 2: lunch_menu(root);
+                                break;
+
+                        case 3: dinner_menu(root);
+                                break;
+
+                        case 4: exit(0);
+                                break;
+                    }
+                    break;
+
+            case 4: exit(0);
+        }
+    }
+}
+
+order dinner_order(order root){
+    order temp;
+    order last;
+    int item_num;
+    int quantity;
+
+    printf("Enter the item number to order\n");
+    scanf("%d",&item_num);
+
+    printf("Enter the quantity to order\n");
+    scanf("%d",&quantity);
+
+    temp=getnode();
+
+    temp->item_num=item_num;
+    temp->quantity=quantity;
+    temp->link=NULL;
+
+    if(root==NULL){
+        return temp;
+    }
+
+    if(root->link==NULL){
+        root->link=temp;
+        return root;
+    }
+
+    last=root;
+
+    while(last->link!=NULL){
+        last=last->link;
+    }
+    last->link=temp;
+    return root;
+}
+
+void display_dinner_order(order root){
+    order temp;
+
+    temp=root;
+
+    while(temp!=NULL){
+        printf("Item num- %d\nQuantity- %d\n",(temp->item_num),(temp->quantity));
+        temp=temp->link;
+    }
 }
