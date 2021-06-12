@@ -62,8 +62,7 @@ void main()
     char lunchmenu[][100]={"Veg Biryani","Special meal","Roti","Dal-Tadka","Paneer Tikka","Veg mix","Icecream"};
     char dinnermenu[][100]={"Fried rice","Spegatti","Burger","Pasta","Noodles","Paratha","Fruit Salad"};
     char choice;
-    int flag;
-    do
+    for(;;)
     {
         enter:
         display();
@@ -84,22 +83,11 @@ void main()
             case 'c':printf("\nDinner\n");
                     dinner(dinnermenu);
                     break;
-           default:printf("\nWrong choice entered Please enter the valid choice to continue at our restaurant!!\n");
-                    printf("[1]Yes, [2]No\n ");
-                    scanf("%d",&flag);
-                    switch(flag)
-                    {
-                        case 1: goto enter;
-                                break;
 
-                        case 2: exit(0);
-                                break;
-                            
-                        default: printf("Enter a valid option\n");
-                                 goto enter;
-                    }
+           default: exit(0);
+
         }
-    }while(choice!='d');
+    }
 }
 void display()
 {
@@ -160,9 +148,7 @@ void repeatbf(char bfmenu[][100])
             bfast(bfmenu);
     else
     {
-        //return;
         display_bf_bill(bfmenu);
-        exit(0);
     }
 }
 void display_bf_bill(char bfmenu[][100])
@@ -188,7 +174,7 @@ void display_bf_bill(char bfmenu[][100])
     printf("\t\t\t Total=Rs.%0.2f\n",total+gst+cgst+sgst);
     printf("\t\t\t -------------------\n");
     printf("\n\n  +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+          \n\n");
-
+    exit(0);
 }
 void display_lunch_bill(char lunchmenu[][100])
 {
