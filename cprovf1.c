@@ -28,6 +28,7 @@ order getnode(){
 void bf_menu(order root);
 void lunch_menu(order root);
 void dinner_menu(order root);
+void display_all_food_menu();
 
 order bf_order(order root);
 order lunch_order(order root);
@@ -51,6 +52,9 @@ void main(){
         scanf("%d",&ch);
 
         switch(ch){
+            case 0: display_all_food_menu();
+                    break;
+
             case 1: bf_menu(root);
                     break;
             
@@ -71,10 +75,42 @@ void main(){
     }
 }
 
+void display_all_food_menu(){
+        printf("                  $  Breakfast Menu  $ \t\t");
+        printf("\t\t\t\t\t                  $  Lunch Menu  $ \n\n");
+        printf(" ~~ Please select the breakfast that you would like to purchase with serial number ~~ \t");
+        printf(" ~~ Please select the lunch that you would like to purchase ~~ \n\n");
+        printf("\t\t   1) Toast - Rs 30.00\t\t");
+        printf("\t\t\t\t\t\t\t   8) Veg Biryani - Rs 80.00\n");
+        printf("\t\t   2) Idli-Vada - Rs 35.00\t\t");
+        printf("\t\t\t\t\t\t   9) Special Meal- Rs 120.00\n");
+        printf("\t\t   3) Dosa - Rs 40.00\t\t");
+        printf("\t\t\t\t\t\t\t   10) Roti - Rs 20.00\n");
+        printf("\t\t   4) UPMA - Rs 20.00\t\t");
+        printf("\t\t\t\t\t\t\t   11) Dal tadka - Rs 120.00\n");
+        printf("\t\t   5) Milk- Rs 15.00\t\t");
+        printf("\t\t\t\t\t\t\t   12) Paneer Tikka - Rs 150.00\n");
+        printf("\t\t   6) Tea - Rs 20.00\t\t");
+        printf("\t\t\t\t\t\t\t   13) Veg Mix - Rs 160.00\n");
+        printf("\t\t   7) Coffee - Rs 30.00\t\t");
+        printf("\t\t\t\t\t\t\t   14) Ice cream - Rs 30.00\n\n");
+
+        printf("\t\t\t\t\t         $  Dinner Menu  $ \n\n");
+        printf("\t\t\t\t\t\t ~~ Please select the food that you would like to purchase ~~ \n\n");
+        printf("\t\t\t\t\t\t   15) Fried Rice - Rs 65.00\n");
+        printf("\t\t\t\t\t\t   16) Spegatti- Rs 50.00\n");
+        printf("\t\t\t\t\t\t   17) Burger - Rs 70.00\n");
+        printf("\t\t\t\t\t\t   18) Pasta - Rs 80.00\n");
+        printf("\t\t\t\t\t\t   19) Noodles - Rs 65.00\n");
+        printf("\t\t\t\t\t\t   20) Paratha - Rs 110.00\n");
+        printf("\t\t\t\t\t\t   21) Fruit Salad - Rs 50.00\n\n");       
+}
+
 void display_main_menu(){
     printf("                Welcome to C Restaurant.          \n ");
     printf("             +============================+          \n\n");
     printf("  ~~ Please select the meal that you would like to purchase. ~~ \n\n");
+    printf("\t\t      0)  Complete food menu\n");
     printf("\t\t      1)  Breakfast\n");
     printf("\t\t      2)  Lunch\n");
     printf("\t\t      3)  Dinner\n");
@@ -112,6 +148,9 @@ void bf_menu(order root){
                     scanf("%d",&choice);
 
                     switch(choice){
+                        case 0: display_all_food_menu();
+                                break;
+
                         case 1: bf_menu(root);
                                 break;
                         
@@ -214,6 +253,9 @@ void lunch_menu(order root){
                     scanf("%d",&choice);
 
                     switch(choice){
+                        case 0: display_all_food_menu();
+                                break;
+
                         case 1: bf_menu(root);
                                 break;
                         
@@ -316,6 +358,9 @@ void dinner_menu(order root){
                     scanf("%d",&choice);
 
                     switch(choice){
+                        case 0: display_all_food_menu();
+                                break;
+
                         case 1: bf_menu(root);
                                 break;
                         
@@ -422,6 +467,9 @@ void display_bill(order root,int rate[][2]){
     printf("Enter the food menu option to choose\n");
     scanf("%d",&choice);
     switch(choice){
+        case 0: display_all_food_menu();
+                break;
+
         case 1: bf_menu(root);
                 break;
                         
