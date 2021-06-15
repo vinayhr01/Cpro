@@ -403,7 +403,7 @@ order cancel_order(order root){
                     quantity--;
                 }
             }
-            printf("%d quantity in temp is deleted",(temp->quantity));
+            //printf("%d quantity in temp is deleted\n\n",(temp->quantity));
             return root;
 
             if(temp->quantity==0){
@@ -427,6 +427,9 @@ void display_food_order(order root,char food_item_list[][50]){
     printf("\t\t~~Item Name\t\tItem Number\t\tItem Quantity\n\n");
 
     while(temp!=NULL){
+        if(temp->quantity==0){
+            temp=temp->link;
+        }
         printf("\t\t%s\t\t\t%d\t\t\t%d\n\n",food_item_list[(temp->item_num)-1],(temp->item_num),(temp->quantity));
         temp=temp->link;
     }
@@ -458,6 +461,10 @@ void display_bill(order root,int rate[][2],char food_item_list[][50]){
     temp=root;
 
     while(temp!=NULL){
+        if(temp->quantity==0){
+            temp=temp->link;
+        }
+
         printf("\t%s\t\t     %d\t\t    %d\t\t\t%d\t\t     %d X %d = %d\n\n",(food_item_list[(temp->item_num)-1]),(temp->item_num),(temp->quantity),(rate[(temp->item_num)-1][1]),(temp->quantity),(rate[(temp->item_num)-1][1]),((temp->quantity)*(rate[(temp->item_num)-1][1])));
         bill+=(temp->quantity)*(rate[(temp->item_num)-1][1]);
         temp=temp->link;
