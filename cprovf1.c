@@ -37,6 +37,7 @@ void dinner_menu(order root);
 void display_all_food_menu();
 
 order food_order(order root);
+order cancel_order(order root);
 
 void display_food_order(order root,char food_item_list[][50]);
 
@@ -135,15 +136,19 @@ void bf_menu(order root){
         printf("\t\t   6) Tea - Rs 20.00\n");
         printf("\t\t   7) Coffee - Rs 30.00\n");
 
-        printf("Enter an option in\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
+        printf("Enter an option in\n1]To order\n2]To cancel order\n3]Display order\n4]Display Main Menu\n5]Exit\n");
         scanf("%d",&ch);
         switch(ch){
             case 1: root=food_order(root);
                     break;
-            case 2: display_food_order(root,food_item_list);
+
+            case 2: root=cancel_order(root);
                     break;
 
-            case 3: display_main_menu();
+            case 3: display_food_order(root,food_item_list);
+                    break;
+
+            case 4: display_main_menu();
                     printf("Enter the menu option to choose\n");
                     scanf("%d",&choice);
 
@@ -168,7 +173,7 @@ void bf_menu(order root){
                     }
                     break;
 
-            case 4: exit(0);
+            case 5: exit(0);
         }
     }
 }
@@ -190,15 +195,19 @@ void lunch_menu(order root){
         printf("\t\t   13) Veg Mix - Rs 160.00\n");
         printf("\t\t   14) Ice cream - Rs 30.00\n");
 
-        printf("Enter an option in\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
+        printf("Enter an option in\n1]To order\n2]To cancel order\n3]Display order\n4]Display Main Menu\n5]Exit\n");
         scanf("%d",&ch);
         switch(ch){
             case 1: root=food_order(root);
                     break;
-            case 2: display_food_order(root,food_item_list);
+
+            case 2: root=cancel_order(root);
                     break;
 
-            case 3: display_main_menu();
+            case 3: display_food_order(root,food_item_list);
+                    break;
+
+            case 4: display_main_menu();
                     printf("Enter the menu option to choose\n");
                     scanf("%d",&choice);
 
@@ -222,7 +231,7 @@ void lunch_menu(order root){
                     }
                     break;
 
-            case 4: exit(0);
+            case 5: exit(0);
         }
     }
 }
@@ -249,10 +258,14 @@ void dinner_menu(order root){
         switch(ch){
             case 1: root=food_order(root);
                     break;
-            case 2: display_food_order(root,food_item_list);
+
+            case 2: root=cancel_order(root);
                     break;
 
-            case 3: display_main_menu();
+            case 3: display_food_order(root,food_item_list);
+                    break;
+
+            case 4: display_main_menu();
                     printf("Enter the food menu option to choose\n");
                     scanf("%d",&choice);
 
@@ -276,7 +289,7 @@ void dinner_menu(order root){
                     }
                     break;
 
-            case 4: exit(0);
+            case 5: exit(0);
         }
     }
 }
@@ -290,8 +303,18 @@ order food_order(order root){
     printf("Enter the food item number to order\n");
     scanf("%d",&item_num);
 
+    if(item_num<1 && item_num>21){
+        printf("Enter right item number\n");
+        return root;
+    }
+
     printf("Enter the quantity of food items to order\n");
     scanf("%d",&quantity);
+
+    if(quantity==0){
+        printf("Enter a correct quantity number\n");
+        return root;
+    }
 
     temp=getnode();
 
@@ -315,6 +338,82 @@ order food_order(order root){
     }
     last->link=temp;
     return root;
+}
+
+order cancel_order(order root){
+    order temp,prev;
+    int key,quantity;
+
+    if(root==NULL){
+        printf("Nothing to cancel, please place an order\n");
+        return root;
+    }
+
+    printf("Enter the item number to cancel the order\n");
+    scanf("%d",&key);
+
+    printf("Enter the quantity of food item to cancel\n");
+    scanf("%d",&quantity);
+
+    if(root->link==NULL){
+        if(key==root->item_num){
+            if(quantity>root->quantity){
+                printf("Enter correct quantity\n");
+                return root;
+            }
+
+            printf("%d items are deleted with item number %d\n",quantity,(root->item_num));
+
+            if(quantity<=root->quantity && quantity>0){
+                while(quantity!=0){
+                    root->quantity-=1;
+                    quantity--;
+                }
+            }
+            //printf("%d quantity in root is deleted",(root->quantity));
+        }
+        else if(key!=root->item_num){
+            printf("Enter correct item number\n");
+            return root;
+        }
+        if(key==root->item_num && root->quantity==0){
+            printf("There is nothing to delete now, please order a food item\n");
+            free(root);
+            return NULL;
+        }
+        return root;
+    }
+
+    prev=NULL;
+    temp=root;
+    
+    while(temp!=NULL){
+        prev=temp;
+        temp=temp->link;
+        if(key==temp->item_num){
+            if(quantity>temp->quantity){
+                printf("Enter correct quantity\n");
+                return root;
+            }
+
+            printf("%d items are deleted with item number %d\n",quantity,(temp->item_num));
+            if(quantity<=temp->quantity && quantity>0){
+                while(quantity!=0){
+                    temp->quantity-=1;
+                    quantity--;
+                }
+            }
+            printf("%d quantity in temp is deleted",(temp->quantity));
+            return root;
+
+            if(temp->quantity==0){
+                prev->link=temp->link;
+                temp->link=NULL;
+                free(temp);
+                return root;
+            }
+        }
+    }
 }
 
 void display_food_order(order root,char food_item_list[][50]){
