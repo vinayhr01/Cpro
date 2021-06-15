@@ -6,6 +6,11 @@ int rate[21][2]={
     {15,50},{16,70},{17,80},{18,65},{19,110},{20,50}
 };
 
+char food_item_list[][50]={"Toast","Idli Wada","Dosa","Upma","Milk","Tea","Coffee",
+                      "Veg Biryani","Special Meal","Roti","Dal Tadka","Paneer Tikka","Veg Mix","Ice Cream",
+                      "Fried Rice","Spegatti","Burger","Pasta","Noodles","Paratha","Fruit Salad"
+};
+
 struct node{
     int item_num;
     int quantity;
@@ -25,22 +30,17 @@ order getnode(){
     return allocate;
 }
 
+void display_main_menu();
 void bf_menu(order root);
 void lunch_menu(order root);
 void dinner_menu(order root);
 void display_all_food_menu();
 
-order bf_order(order root);
-order lunch_order(order root);
-order dinner_order(order root);
+order food_order(order root);
 
-void display_bf_order(order root);
-void display_lunch_order(order root);
-void display_dinner_order(order root);
+void display_food_order(order root,char food_item_list[][50]);
 
-void display_main_menu();
-
-void display_bill(order root,int rate[][2]);
+void display_bill(order root,int rate[][2],char food_item_list[][50]);
 
 void main(){
     int ch;
@@ -64,7 +64,7 @@ void main(){
             case 3: dinner_menu(root);
                     break;
 
-            case 4: display_bill(root,rate);
+            case 4: display_bill(root,rate,food_item_list);
                     break;
 
             case 5: exit(0);
@@ -138,9 +138,9 @@ void bf_menu(order root){
         printf("Enter an option in\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
         scanf("%d",&ch);
         switch(ch){
-            case 1: root=bf_order(root);
+            case 1: root=food_order(root);
                     break;
-            case 2: display_bf_order(root);
+            case 2: display_food_order(root,food_item_list);
                     break;
 
             case 3: display_main_menu();
@@ -160,7 +160,7 @@ void bf_menu(order root){
                         case 3: dinner_menu(root);
                                 break;
 
-                        case 4: display_bill(root,rate);
+                        case 4: display_bill(root,rate,food_item_list);
                                 break;
 
                         case 5: exit(0);
@@ -170,56 +170,6 @@ void bf_menu(order root){
 
             case 4: exit(0);
         }
-    }
-}
-
-order bf_order(order root){
-    order temp;
-    order last;
-    int item_num;
-    int quantity;
-
-    printf("Enter the breakfast item number to order\n");
-    scanf("%d",&item_num);
-
-    printf("Enter the quantity of breakfast to order\n");
-    scanf("%d",&quantity);
-
-    temp=getnode();
-
-    temp->item_num=item_num;
-    temp->quantity=quantity;
-    temp->link=NULL;
-
-    if(root==NULL){
-        return temp;
-    }
-
-    if(root->link==NULL){
-        root->link=temp;
-        return root;
-    }
-
-    last=root;
-
-    while(last->link!=NULL){
-        last=last->link;
-    }
-    last->link=temp;
-    return root;
-}
-
-void display_bf_order(order root){
-    order temp;
-
-    if(root==NULL){
-        printf("You haven't ordered anything\n");
-    }
-    temp=root;
-
-    while(temp!=NULL){
-        printf("Breakfast item num- %d\tBreakfast Quantity- %d\n",(temp->item_num),(temp->quantity));
-        temp=temp->link;
     }
 }
 
@@ -243,9 +193,9 @@ void lunch_menu(order root){
         printf("Enter an option in\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
         scanf("%d",&ch);
         switch(ch){
-            case 1: root=lunch_order(root);
+            case 1: root=food_order(root);
                     break;
-            case 2: display_lunch_order(root);
+            case 2: display_food_order(root,food_item_list);
                     break;
 
             case 3: display_main_menu();
@@ -265,7 +215,7 @@ void lunch_menu(order root){
                         case 3: dinner_menu(root);
                                 break;
 
-                        case 4: display_bill(root,rate);
+                        case 4: display_bill(root,rate,food_item_list);
                                 break;
 
                         case 5: exit(0);
@@ -274,57 +224,6 @@ void lunch_menu(order root){
 
             case 4: exit(0);
         }
-    }
-}
-
-order lunch_order(order root){
-    order temp;
-    order last;
-    int item_num;
-    int quantity;
-
-    printf("Enter the lunch item number to order\n");
-    scanf("%d",&item_num);
-
-    printf("Enter the quantity of lunch to order\n");
-    scanf("%d",&quantity);
-
-    temp=getnode();
-
-    temp->item_num=item_num;
-    temp->quantity=quantity;
-    temp->link=NULL;
-
-    if(root==NULL){
-        return temp;
-    }
-
-    if(root->link==NULL){
-        root->link=temp;
-        return root;
-    }
-
-    last=root;
-
-    while(last->link!=NULL){
-        last=last->link;
-    }
-    last->link=temp;
-    return root;
-}
-
-void display_lunch_order(order root){
-    order temp;
-
-    if(root==NULL){
-        printf("You haven't ordered anything\n");
-    }
-
-    temp=root;
-
-    while(temp!=NULL){
-        printf("Lunch item num- %d\tLunch Quantity- %d\n",(temp->item_num),(temp->quantity));
-        temp=temp->link;
     }
 }
 
@@ -348,9 +247,9 @@ void dinner_menu(order root){
         printf("Enter an option in\n1]To order\n2]Display order\n3]Display Main Menu\n4]Exit\n");
         scanf("%d",&ch);
         switch(ch){
-            case 1: root=dinner_order(root);
+            case 1: root=food_order(root);
                     break;
-            case 2: display_dinner_order(root);
+            case 2: display_food_order(root,food_item_list);
                     break;
 
             case 3: display_main_menu();
@@ -370,7 +269,7 @@ void dinner_menu(order root){
                         case 3: dinner_menu(root);
                                 break;
 
-                        case 4: display_bill(root,rate);
+                        case 4: display_bill(root,rate,food_item_list);
                                 break;
 
                         case 5: exit(0);
@@ -382,16 +281,16 @@ void dinner_menu(order root){
     }
 }
 
-order dinner_order(order root){
+order food_order(order root){
     order temp;
     order last;
     int item_num;
     int quantity;
 
-    printf("Enter the dinner item number to order\n");
+    printf("Enter the food item number to order\n");
     scanf("%d",&item_num);
 
-    printf("Enter the quantity of dinner to order\n");
+    printf("Enter the quantity of food items to order\n");
     scanf("%d",&quantity);
 
     temp=getnode();
@@ -418,22 +317,23 @@ order dinner_order(order root){
     return root;
 }
 
-void display_dinner_order(order root){
+void display_food_order(order root,char food_item_list[][50]){
     order temp;
 
     if(root==NULL){
         printf("You haven't ordered anything\n");
     }
-
     temp=root;
 
+    printf("\t\t~~Item Name\t\tItem Number\t\tItem Quantity\n\n");
+
     while(temp!=NULL){
-        printf("Dinner item num- %d\tDinner Quantity- %d\n",(temp->item_num),(temp->quantity));
+        printf("\t\t%s\t\t\t%d\t\t\t%d\n\n",food_item_list[(temp->item_num)-1],(temp->item_num),(temp->quantity));
         temp=temp->link;
     }
 }
 
-void display_bill(order root,int rate[][2]){
+void display_bill(order root,int rate[][2],char food_item_list[][50]){
     int bill=0;
     order temp;
     float gst,cgst,sgst,total_bill;
@@ -444,7 +344,13 @@ void display_bill(order root,int rate[][2]){
         return;
     }
 
+    printf("  +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+          \n\n");
+    printf("                      C RESTAURANT                   \n");
+    printf("                    BILLING INFORMATION                \n");
+    printf("\t ITEM NAME\t\t ITEM NUMBER \t Quantity \tPrice(in Rs./item)\t    Total Price\n\n");
+
     if(root->link==NULL){
+        printf("\t%s\t\t     %d\t\t    %d\t\t\t%d\t\t     %d X %d = %d\n\n",(food_item_list[(root->item_num)-1]),(root->item_num),(root->quantity),(rate[(root->item_num)-1][1]),(root->quantity),(rate[(root->item_num)-1][1]),((root->quantity)*(rate[(root->item_num)-1][1])));
         bill=(root->quantity)*(rate[(root->item_num)-1][1]);
         printf("Total bill = %d\n",bill);
         return;
@@ -453,15 +359,16 @@ void display_bill(order root,int rate[][2]){
     temp=root;
 
     while(temp!=NULL){
+        printf("\t%s\t\t     %d\t\t    %d\t\t\t%d\t\t     %d X %d = %d\n\n",(food_item_list[(temp->item_num)-1]),(temp->item_num),(temp->quantity),(rate[(temp->item_num)-1][1]),(temp->quantity),(rate[(temp->item_num)-1][1]),((temp->quantity)*(rate[(temp->item_num)-1][1])));
         bill+=(temp->quantity)*(rate[(temp->item_num)-1][1]);
         temp=temp->link;
     }
-    printf("Total bill without gst = %d\n",bill);
+    printf("\t  Total bill without gst = %d\n",bill);
     gst=bill*0.12;
     cgst=gst/2;
     sgst=cgst;
     total_bill=bill+gst+cgst+sgst;
-    printf("Total bill with gst = %0.2f\n",total_bill);
+    printf("\t  Total bill with gst = %0.2f\n\n",total_bill);
 
     display_main_menu();
     printf("Enter the food menu option to choose\n");
@@ -479,7 +386,7 @@ void display_bill(order root,int rate[][2]){
         case 3: dinner_menu(root);
                 break;
 
-        case 4: display_bill(root,rate);
+        case 4: display_bill(root,rate,food_item_list);
                 break;
 
         case 5: exit(0);
