@@ -68,7 +68,7 @@ void main(){
             case 4: display_bill(root,rate,food_item_list);
                     break;
 
-            case 5: printf("THANKYOU FOR VISITING C RESTAURANT");
+            case 5: printf("THANKYOU FOR VISITING C RESTAURANT\n\n");
                     exit(0);
 
             default: break;
@@ -169,12 +169,12 @@ void bf_menu(order root){
                         case 4: display_bill(root,rate,food_item_list);
                                 break;
 
-                        case 5: printf("THANKYOU FOR VISITING C RESTAURANT");
+                        case 5: printf("THANKYOU FOR VISITING C RESTAURANT\n\n");
                                 exit(0);
                     }
                     break;
 
-            case 5: printf("THANKYOU FOR VISITING C RESTAURANT");
+            case 5: printf("THANKYOU FOR VISITING C RESTAURANT\n\n");
                     exit(0);
         }
     }
@@ -229,12 +229,12 @@ void lunch_menu(order root){
                         case 4: display_bill(root,rate,food_item_list);
                                 break;
 
-                        case 5: printf("THANKYOU FOR VISITING C RESTAURANT");
+                        case 5: printf("THANKYOU FOR VISITING C RESTAURANT\n\n");
                                 exit(0);
                     }
                     break;
 
-            case 5: printf("THANKYOU FOR VISITING C RESTAURANT");
+            case 5: printf("THANKYOU FOR VISITING C RESTAURANT\n\n");
                     exit(0);
         }
     }
@@ -289,12 +289,12 @@ void dinner_menu(order root){
                         case 4: display_bill(root,rate,food_item_list);
                                 break;
 
-                        case 5: printf("THANKYOU FOR VISITING C RESTAURANT");
+                        case 5: printf("THANKYOU FOR VISITING C RESTAURANT\n\n");
                                 exit(0);
                     }
                     break;
 
-            case 5: printf("THANKYOU FOR VISITING C RESTAURANT");
+            case 5: printf("THANKYOU FOR VISITING C RESTAURANT\n\n");
                     exit(0);
         }
     }
@@ -448,7 +448,7 @@ void display_bill(order root,int rate[][2],char food_item_list[][50]){
     int choice;
 
     if(root==NULL){
-        printf("You haven't ordered anything to display the bill\n");
+        printf("You haven't ordered anything to display the bill\n\n");
         return;
     }
 
@@ -501,7 +501,7 @@ void display_bill(order root,int rate[][2],char food_item_list[][50]){
         case 4: display_bill(root,rate,food_item_list);
                 break;
 
-        case 5: printf("THANKYOU FOR VISITING C RESTAURANT");
+        case 5: printf("THANKYOU FOR VISITING C RESTAURANT\n\n");
                 exit(0);
         }
 }
