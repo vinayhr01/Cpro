@@ -11,8 +11,7 @@ This repository consists of a project called Offline food ordering and billing s
     Therefore this is a project in C which does the job of taking food orders 
     and displays bill 
     which allows cancellation of food at times when customer doesn't wish for the item also.
-    
-    This repository consists of 2 project files which does the same job in a different way.
+
 # Features
     Some of the features are, 
     1. Ordering and cancelling of food based on required quantity.
