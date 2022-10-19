@@ -1,4 +1,4 @@
-# Cpro
+# C Project
 
 This repository consists of a project called Offline food ordering and billing system.
 
